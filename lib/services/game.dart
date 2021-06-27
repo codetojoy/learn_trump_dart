@@ -85,20 +85,25 @@ class Game {
     final sortedCards = List<Card>.from(cards);
     Ranker(trumpSuit, leadingSuit).customSortArray(sortedCards);
 
-    stdout.writeln('trumpSuit: $trumpSuit');
-    stdout.writeln('leadingSuit: $leadingSuit');
-    stdout.writeln('cards: $cards');
-    stdout.writeln('sorted cards: $sortedCards');
+    var done = false;
 
-    final selection = _getSelection(cards);
+    while (!done) {
+      stdout.writeln('trumpSuit: $trumpSuit');
+      stdout.writeln('leadingSuit: $leadingSuit');
+      stdout.writeln('cards: $cards');
+      stdout.writeln('sorted cards: $sortedCards');
 
-    if (selection == sortedCards[numCards - 1]) {
-      stdout.writeln('correct!');
-      roundInfo = roundInfo.correctGuess();
-      stdout.writeln('$roundInfo');
-    } else {
-      stdout.writeln('try again');
-      roundInfo = roundInfo.wrongGuess();
+      final selection = _getSelection(cards);
+
+      if (selection == sortedCards[numCards - 1]) {
+        stdout.writeln('correct!');
+        roundInfo = roundInfo.correctGuess();
+        stdout.writeln('$roundInfo');
+        done = true;
+      } else {
+        stdout.writeln('try again');
+        roundInfo = roundInfo.wrongGuess();
+      }
     }
 
     return roundInfo;

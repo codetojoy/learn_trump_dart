@@ -10,7 +10,7 @@ enum Mode {
 class Config {
   static const int _numCards = 5;
   static const int _numRounds = 3;
-  static const Mode _mode = Mode.mixed_cards;
+  static const Mode _mode = Mode.pure_suit;
   final _players = <Player>[];
 
   List<Player> getPlayers() {
