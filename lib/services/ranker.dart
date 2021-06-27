@@ -1,4 +1,3 @@
-import '../models/bid.dart';
 import '../models/card.dart';
 import '../models/cards.dart';
 
@@ -241,10 +240,6 @@ class Ranker {
 
   void customSortArray(List<Card> cards) {
     cards.sort((a, b) => customSort(a, b));
-  }
-
-  void customSortBids(List<Bid> bids) {
-    bids.sort((a, b) => customSort(a.card, b.card));
   }
 
   int getValueFromId(Card card) {

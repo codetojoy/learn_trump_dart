@@ -3,7 +3,6 @@ import 'package:test/test.dart';
 
 import 'package:learn_trump_dart/models/card.dart';
 import 'package:learn_trump_dart/models/cards.dart';
-import 'package:learn_trump_dart/models/trick.dart';
 import 'package:learn_trump_dart/services/ranker.dart';
 
 const CLUBS = Suit.CLUBS;
@@ -11,9 +10,6 @@ const DIAMONDS = Suit.DIAMONDS;
 const HEARTS = Suit.HEARTS;
 const SPADES = Suit.SPADES;
 const UNKNOWN = Suit.UNKNOWN;
-const tsUNKNOWN = TrickState.UNKNOWN;
-const tsLEADING_NO_TRUMP = TrickState.LEADING_NO_TRUMP;
-const tsTRUMP_PLAYED = TrickState.TRUMP_PLAYED;
 
 final c1 = [C.$AC, C.$2D, C.$3H, C.$4S];
 final e1 = c1;
