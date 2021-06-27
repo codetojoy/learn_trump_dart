@@ -11,7 +11,6 @@ class GameLoop {
       stdout.writeln('Q - quit');
       stdout.writeln('your choice: ');
       final input = stdin.readLineSync();
-      stdout.writeln('You typed: $input');
       final upperInput = input!.toUpperCase();
       if (upperInput == 'N') {
         Game().play();

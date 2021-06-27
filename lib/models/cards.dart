@@ -123,4 +123,11 @@ class C {
   static List<Card> getBySuit(Suit suit) {
     return allCards.where((card) => card.suit == suit).toList();
   }
+
+  static List<Card> getRandomBySuit(Suit suit, int numCards) {
+    final cards = List<Card>.from(getBySuit(suit));
+    cards.shuffle();
+    final result = cards.take(numCards).toList();
+    return result;
+  }
 }

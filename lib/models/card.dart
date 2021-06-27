@@ -29,6 +29,14 @@ enum Suit {
   UNKNOWN,
 }
 
+class Suits {
+  Suit getRandom() {
+    final suits = [Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS, Suit.SPADES];
+    suits.shuffle();
+    return suits[0];
+  }
+}
+
 class Card {
   final int _id;
   final Suit _suit;

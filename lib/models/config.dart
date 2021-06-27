@@ -1,10 +1,16 @@
-import './deck.dart';
 import './player.dart';
 import './hand.dart';
 import './strategy.dart';
-import './table.dart';
+
+enum Mode {
+  mixed_cards,
+  pure_suit,
+}
 
 class Config {
+  static const int _numCards = 5;
+  static const int _numRounds = 3;
+  static const Mode _mode = Mode.mixed_cards;
   final _players = <Player>[];
 
   List<Player> getPlayers() {
@@ -24,8 +30,7 @@ class Config {
 
   static Config instance = Config._();
 
-  Table getTable(Deck deck) {
-    var table = Table(_players, deck);
-    return table;
-  }
+  int get numCards => _numCards;
+  Mode get mode => _mode;
+  int get numRounds => _numRounds;
 }
