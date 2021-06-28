@@ -242,6 +242,21 @@ class Ranker {
     cards.sort((a, b) => customSort(a, b));
   }
 
+  List<Card> getTopRankedCards(List<Card> cards) {
+    var topRank = -1;
+    var mapRankToCards = <int, List<Card>>{};
+    cards.forEach((card) {
+      var rank = getValueFromId(card);
+      if (rank > topRank) {
+        topRank = rank;
+      }
+      var list = mapRankToCards[rank] ?? <Card>[];
+      list.add(card);
+      mapRankToCards[rank] = list;
+    });
+    return mapRankToCards[topRank]!;
+  }
+
   int getValueFromId(Card card) {
     var value = unknownValue;
     final id = card.id;

@@ -5,32 +5,35 @@ import '../models/card.dart';
 import '../models/cards.dart';
 import '../models/deck.dart';
 import './ranker.dart';
-import '../utils/constants.dart';
 
 class RoundInfo {
   var firstGuess = true;
   var roundNum = 1;
   var numCorrect = 0;
 
-  RoundInfo.init() {}
+  var _numRounds = 0;
 
-  RoundInfo(this.firstGuess, this.roundNum, this.numCorrect);
+  RoundInfo.init(int numRounds) {
+    _numRounds = numRounds;
+  }
 
-  bool isDone(int numRounds) {
-    return roundNum >= numRounds;
+  RoundInfo(this.firstGuess, this.roundNum, this.numCorrect, this._numRounds);
+
+  bool isDone() {
+    return roundNum >= _numRounds;
   }
 
   RoundInfo nextRound() {
-    return RoundInfo(true, roundNum + 1, numCorrect);
+    return RoundInfo(true, roundNum + 1, numCorrect, _numRounds);
   }
 
   RoundInfo correctGuess() {
     final newNumCorrect = (firstGuess) ? numCorrect + 1 : numCorrect;
-    return RoundInfo(firstGuess, roundNum, newNumCorrect);
+    return RoundInfo(firstGuess, roundNum, newNumCorrect, _numRounds);
   }
 
   RoundInfo wrongGuess() {
-    return RoundInfo(false, roundNum, numCorrect);
+    return RoundInfo(false, roundNum, numCorrect, _numRounds);
   }
 
   @override
@@ -81,9 +84,7 @@ class Game {
     final trumpSuit = Suits().getRandom();
     final leadingSuit = Suits().getRandom();
     final cards = _getCards(trumpSuit);
-    final numCards = Config.instance.numCards;
-    final sortedCards = List<Card>.from(cards);
-    Ranker(trumpSuit, leadingSuit).customSortArray(sortedCards);
+    final topCards = Ranker(trumpSuit, leadingSuit).getTopRankedCards(cards);
 
     var done = false;
 
@@ -91,11 +92,11 @@ class Game {
       stdout.writeln('trumpSuit: $trumpSuit');
       stdout.writeln('leadingSuit: $leadingSuit');
       stdout.writeln('cards: $cards');
-      stdout.writeln('sorted cards: $sortedCards');
+      stdout.writeln('top cards: $topCards');
 
       final selection = _getSelection(cards);
 
-      if (selection == sortedCards[numCards - 1]) {
+      if (topCards.contains(selection)) {
         stdout.writeln('correct!');
         roundInfo = roundInfo.correctGuess();
         stdout.writeln('$roundInfo');
@@ -110,14 +111,12 @@ class Game {
   }
 
   void play() {
-    var done = false;
-    var roundInfo = RoundInfo.init();
+    var roundInfo = RoundInfo.init(Config.instance.numRounds);
 
-    while (!done) {
+    while (!roundInfo.isDone()) {
       roundInfo = playRound(roundInfo);
-      if (roundInfo.isDone(Config.instance.numRounds)) {
+      if (roundInfo.isDone()) {
         stdout.writeln('final score $roundInfo');
-        done = true;
       } else {
         roundInfo = roundInfo.nextRound();
       }
