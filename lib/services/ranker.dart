@@ -243,18 +243,27 @@ class Ranker {
   }
 
   List<Card> getTopRankedCards(List<Card> cards) {
-    var topRank = -1;
-    var mapRankToCards = <int, List<Card>>{};
-    cards.forEach((card) {
-      var rank = getValueFromId(card);
-      if (rank > topRank) {
-        topRank = rank;
+    var result = <Card>[];
+    var sortedCards = List<Card>.from(cards);
+    customSortArray(sortedCards);
+    var topValue = -1;
+    var done = false;
+    sortedCards.reversed.toList().forEach((card) {
+      if (topValue == -1) {
+        topValue = getValueFromId(card);
+        result.add(card);
+      } else {
+        if (!done) {
+          var value = getValueFromId(card);
+          if (value == topValue) {
+            result.add(card);
+          } else {
+            done = true;
+          }
+        }
       }
-      var list = mapRankToCards[rank] ?? <Card>[];
-      list.add(card);
-      mapRankToCards[rank] = list;
     });
-    return mapRankToCards[topRank]!;
+    return result;
   }
 
   int getValueFromId(Card card) {

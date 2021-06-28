@@ -10,7 +10,6 @@ class RoundInfo {
   var firstGuess = true;
   var roundNum = 1;
   var numCorrect = 0;
-
   var _numRounds = 0;
 
   RoundInfo.init(int numRounds) {
@@ -20,7 +19,7 @@ class RoundInfo {
   RoundInfo(this.firstGuess, this.roundNum, this.numCorrect, this._numRounds);
 
   bool isDone() {
-    return roundNum >= _numRounds;
+    return roundNum > _numRounds;
   }
 
   RoundInfo nextRound() {
@@ -84,7 +83,8 @@ class Game {
     final trumpSuit = Suits().getRandom();
     final leadingSuit = Suits().getRandom();
     final cards = _getCards(trumpSuit);
-    final topCards = Ranker(trumpSuit, leadingSuit).getTopRankedCards(cards);
+    final ranker = Ranker(trumpSuit, leadingSuit);
+    final topCards = ranker.getTopRankedCards(cards);
 
     var done = false;
 
@@ -92,7 +92,13 @@ class Game {
       stdout.writeln('trumpSuit: $trumpSuit');
       stdout.writeln('leadingSuit: $leadingSuit');
       stdout.writeln('cards: $cards');
-      stdout.writeln('top cards: $topCards');
+
+      if (Config.instance.debug) {
+        stdout.writeln('top cards: $topCards');
+        var sortedCards = List<Card>.from(cards);
+        ranker.customSortArray(sortedCards);
+        stdout.writeln('sorted cards: $sortedCards');
+      }
 
       final selection = _getSelection(cards);
 
