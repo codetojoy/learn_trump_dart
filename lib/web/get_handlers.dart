@@ -11,6 +11,9 @@ void handleGet(HttpRequest request) {
   print('TRACER path: $path');
 
   switch (path) {
+    case '/ping':
+      handlePing(request);
+      break;
     case '/rank':
       _rankHandler.handleRank(request);
       break;

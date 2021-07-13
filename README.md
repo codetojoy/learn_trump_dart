@@ -8,6 +8,7 @@
     - `./run.sh` to play game
     - `./run_server.sh` to run server for remote BDD tests
     - `./resources/run_client.sh` to test server locally 
+    - `./resources/ping.sh` to test server locally 
 
 ### Rules
 
