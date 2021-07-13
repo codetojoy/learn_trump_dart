@@ -16,7 +16,7 @@ class Parser {
       case Keys.H:
         result = Suit.HEARTS;
         break;
-      case Keys.D:
+      case Keys.S:
         result = Suit.SPADES;
         break;
       default:

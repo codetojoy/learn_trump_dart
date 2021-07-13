@@ -3,6 +3,7 @@ import 'dart:io';
 import './keys.dart';
 import './utils.dart';
 import './services/adapter.dart';
+import '../utils/logger.dart';
 
 class RankHandler {
   final _adapter = Adapter();
@@ -25,6 +26,7 @@ class RankHandler {
     final trump = queryParams[Keys.TRUMP]!;
     final leading = queryParams[Keys.LEADING]!;
     final cards = queryParams[Keys.CARDS]!;
+    L.log('rank t: $trump l: $leading cards: $cards');
     var jsonString = '';
     try {
       jsonString = _adapter.rank(trump, leading, cards);
