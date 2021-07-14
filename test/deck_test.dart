@@ -27,7 +27,6 @@ void main() {
       expect(result[1].id, C.$2C.id);
       expect(result[2].id, C.$3C.id);
       expect(deck.cards.length, Const.NUM_CARDS_IN_DECK - n);
-      // expect(true, deck.cards.length == Const.NUM_CARDS_IN_DECK - 3);
     });
   }); // group
 }
