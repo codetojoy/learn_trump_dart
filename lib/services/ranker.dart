@@ -1,5 +1,6 @@
 import '../models/card.dart';
 import '../models/cards.dart';
+import '../utils/logger.dart';
 
 class RankInfo {
   final card;
@@ -291,6 +292,20 @@ class Ranker {
     return value;
   }
 
+  int getValue(int value, Card card) {
+    var result = value;
+    final isTrump = card.isTrump(_trumpSuit);
+    final isLeadingSuit = card.isLeadingSuit(_leadingSuit);
+
+    if (isTrump) {
+      result += trumpSuitFactor;
+    } else if (isLeadingSuit) {
+      result += leadingSuitFactor;
+    }
+
+    return result;
+  }
+
   int customSort(Card cardA, Card cardB) {
     var valueA = getValueFromId(cardA);
     var valueB = getValueFromId(cardB);
@@ -299,6 +314,9 @@ class Ranker {
       throw Exception('internal error ${cardA} ${cardB}');
     }
 
+    valueA = getValue(valueA, cardA);
+    valueB = getValue(valueB, cardB);
+/*
     final isCardATrump = cardA.isTrump(_trumpSuit);
     final isCardBTrump = cardB.isTrump(_trumpSuit);
 
@@ -307,16 +325,18 @@ class Ranker {
 
     if (isCardATrump) {
       valueA += trumpSuitFactor;
-    }
-    if (isCardBTrump) {
-      valueB += trumpSuitFactor;
-    }
-    if (isCardALeadingSuit) {
+    } else if (isCardALeadingSuit) {
       valueA += leadingSuitFactor;
     }
-    if (isCardBLeadingSuit) {
+
+    if (isCardBTrump) {
+      valueB += trumpSuitFactor;
+    } else if (isCardBLeadingSuit) {
       valueB += leadingSuitFactor;
     }
+    */
+
+    L.log('cA: $cardA vA: $valueA cB: $cardB vB: $valueB');
 
     final result = compare(valueA, valueB);
 
