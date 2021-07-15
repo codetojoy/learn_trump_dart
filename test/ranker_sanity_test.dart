@@ -40,5 +40,32 @@ void main() {
       expect(actual[i++], C.$QC);
       expect(actual[i++], C.$2C);
     });
+    test('sanity2', () {
+      final trumpSuit = CLUBS;
+      final leadingSuit = CLUBS;
+      final ranker = Ranker(trumpSuit, leadingSuit);
+      final cards = <Card>[];
+      cards.add(C.$5C);
+      cards.add(C.$JC);
+      cards.add(C.$AH);
+      cards.add(C.$AC);
+      cards.add(C.$KC);
+      cards.add(C.$QC);
+      cards.add(C.$2C);
+      cards.shuffle();
+
+      // test
+      ranker.customSortArray(cards);
+      final actual = cards.reversed.toList();
+
+      var i = 0;
+      expect(actual[i++], C.$5C);
+      expect(actual[i++], C.$JC);
+      expect(actual[i++], C.$AH);
+      expect(actual[i++], C.$AC);
+      expect(actual[i++], C.$KC);
+      expect(actual[i++], C.$QC);
+      expect(actual[i++], C.$2C);
+    });
   }); // group
 } // main
