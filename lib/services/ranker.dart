@@ -316,27 +316,8 @@ class Ranker {
 
     valueA = getValue(valueA, cardA);
     valueB = getValue(valueB, cardB);
-/*
-    final isCardATrump = cardA.isTrump(_trumpSuit);
-    final isCardBTrump = cardB.isTrump(_trumpSuit);
 
-    final isCardALeadingSuit = cardA.isLeadingSuit(_leadingSuit);
-    final isCardBLeadingSuit = cardB.isLeadingSuit(_leadingSuit);
-
-    if (isCardATrump) {
-      valueA += trumpSuitFactor;
-    } else if (isCardALeadingSuit) {
-      valueA += leadingSuitFactor;
-    }
-
-    if (isCardBTrump) {
-      valueB += trumpSuitFactor;
-    } else if (isCardBLeadingSuit) {
-      valueB += leadingSuitFactor;
-    }
-    */
-
-    L.log('cA: $cardA vA: $valueA cB: $cardB vB: $valueB');
+    // L.log('cA: $cardA vA: $valueA cB: $cardB vB: $valueB');
 
     final result = compare(valueA, valueB);
 
