@@ -231,6 +231,7 @@ class Ranker {
 
   Ranker(this._trumpSuit, this._leadingSuit);
 
+/*
   int compare(int a, int b) {
     return a == b
         ? 0
@@ -238,6 +239,7 @@ class Ranker {
             ? 1
             : -1;
   }
+  */
 
   void customSortArray(List<Card> cards) {
     cards.sort((a, b) => customSort(a, b));
@@ -319,7 +321,16 @@ class Ranker {
 
     // L.log('cA: $cardA vA: $valueA cB: $cardB vB: $valueB');
 
-    final result = compare(valueA, valueB);
+    var result = 0;
+
+    if (valueA == valueB) {
+      // same value, so order by suit
+      final suitIndexA = cardA.suit.index;
+      final suitIndexB = cardB.suit.index;
+      result = suitIndexB.compareTo(suitIndexA);
+    } else {
+      result = valueA.compareTo(valueB);
+    }
 
     return result;
   }

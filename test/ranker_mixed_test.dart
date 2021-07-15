@@ -24,7 +24,7 @@ final valueMap = [
   // n, trump, leading, a, b, expected
   {'n': 1, 't': HEARTS, 'l': UNKNOWN, 'a': C.$KH, 'b': C.$2H, 'e': 1},
   {'n': 2, 't': CLUBS, 'l': UNKNOWN, 'a': C.$2D, 'b': C.$AD, 'e': 1},
-  {'n': 3, 't': CLUBS, 'l': UNKNOWN, 'a': C.$10D, 'b': C.$10H, 'e': 0},
+  {'n': 3, 't': CLUBS, 'l': UNKNOWN, 'a': C.$10D, 'b': C.$10H, 'e': 1},
   {'n': 4, 't': CLUBS, 'l': UNKNOWN, 'a': C.$AC, 'b': C.$KS, 'e': 1},
   {'n': 5, 't': CLUBS, 'l': HEARTS, 'a': C.$2C, 'b': C.$KH, 'e': 1},
   {'n': 6, 't': CLUBS, 'l': HEARTS, 'a': C.$2S, 'b': C.$6S, 'e': 1},
