@@ -81,8 +81,8 @@ class Game {
   RoundInfo playRound(RoundInfo inRoundInfo) {
     var roundInfo = inRoundInfo;
     final trumpSuit = Suits().getRandom();
-    final leadingSuit = Suits().getRandom();
     final cards = _getCards(trumpSuit);
+    final leadingSuit = cards[0].suit;
     final ranker = Ranker(trumpSuit, leadingSuit);
     final topCards = ranker.getTopRankedCards(cards);
 
@@ -95,8 +95,9 @@ class Game {
 
       if (Config.instance.debug) {
         stdout.writeln('top cards: $topCards');
-        var sortedCards = List<Card>.from(cards);
-        ranker.customSortArray(sortedCards);
+        final tmpRankCards = List<Card>.from(cards);
+        ranker.customSortArray(tmpRankCards);
+        final sortedCards = tmpRankCards.reversed.toList();
         stdout.writeln('sorted cards: $sortedCards');
       }
 
