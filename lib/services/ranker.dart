@@ -231,16 +231,6 @@ class Ranker {
 
   Ranker(this._trumpSuit, this._leadingSuit);
 
-/*
-  int compare(int a, int b) {
-    return a == b
-        ? 0
-        : a > b
-            ? 1
-            : -1;
-  }
-  */
-
   void customSortArray(List<Card> cards) {
     cards.sort((a, b) => customSort(a, b));
   }
