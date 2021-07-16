@@ -9,6 +9,7 @@
     - `./run_server.sh` to run server for remote BDD tests
     - `./resources/run_client.sh` to test server locally 
     - `./resources/ping.sh` to test server locally 
+* BDD tests (executed via web API) are [here](https://github.com/codetojoy/forty-fives-spec-cucumber-jvm)
 
 ### Rules
 
